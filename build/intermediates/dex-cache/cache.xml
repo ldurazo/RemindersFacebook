@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="C:\Users\ldurazo\Documents\GitHub\miniature-octo-computing-machine\RemindersFacebook\app\build\intermediates\pre-dexed\debug\support-v4-19.0.1-04dde37e48405b4442ed2e114457f34f6f27cab4.jar"
+        jar="C:\Program Files (x86)\Android\android-studio\sdk\extras\android\m2repository\com\android\support\support-v4\19.0.1\support-v4-19.0.1.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="587da9a481ffd341d2fa091704489b89845ddacd"/>
+    <item
+        dex="C:\Users\ldurazo\Documents\GitHub\miniature-octo-computing-machine\RemindersFacebook\app\build\intermediates\pre-dexed\debug\classes-5314ca0e43012916dcfe8fa80e3eb44b5aaf1363.jar"
+        jar="C:\Users\ldurazo\Documents\GitHub\miniature-octo-computing-machine\RemindersFacebook\build\intermediates\exploded-aar\com.android.support\appcompat-v7\19.0.1\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="f71a6822470c9eb659d4f4a6cb57b780b35f058b"/>
+    <item
+        dex="C:\Users\ldurazo\Documents\GitHub\miniature-octo-computing-machine\RemindersFacebook\app\build\intermediates\pre-dexed\debug\classes-199cc4a541f3070dc34479c03e474afb5671ffc0.jar"
+        jar="C:\Users\ldurazo\Documents\GitHub\miniature-octo-computing-machine\RemindersFacebook\build\intermediates\exploded-aar\RemindersFacebook\facebook\unspecified\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="684996243bea9fdc815a6662650dbe004fc033db"/>
+    <item
+        dex="C:\Users\ldurazo\Documents\GitHub\miniature-octo-computing-machine\RemindersFacebook\app\build\intermediates\pre-dexed\debug\bolts-70020b84fc6334884252d3315a472ef62d3d548f.jar"
+        jar="C:\Users\ldurazo\Documents\GitHub\miniature-octo-computing-machine\RemindersFacebook\build\intermediates\exploded-aar\RemindersFacebook\facebook\unspecified\libs\bolts.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="1e5ba33c837d05dcca9dc40a0ab458f8599d7aef"/>
+
+</pre-dex-items>
