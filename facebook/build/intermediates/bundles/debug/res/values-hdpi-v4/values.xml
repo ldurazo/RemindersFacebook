@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- From: file:/C:/Users/ldurazo/Documents/GitHub/miniature-octo-computing-machine/RemindersFacebook/facebook/res/values-hdpi/dimens.xml -->
+    <!-- From: file:/C:/Users/Ringo/Documents/GitHub/RemindersFacebook/facebook/res/values-hdpi/dimens.xml -->
     <eat-comment />
 
     <dimen name="com_facebook_picker_divider_width">1px</dimen>
