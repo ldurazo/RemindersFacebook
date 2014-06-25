@@ -49,7 +49,8 @@ public class AddReminderActivity extends Activity {
     }
 
     public void AddReminder(View view){
-        if(mContentText.getText().toString().trim().length()>0){
+        //Cannot add expired date reminders or empty body reminders
+        if(mContentText.getText().toString().trim().length()>0) {
             Calendar currentTime = Calendar.getInstance();
             int day=mDatePicker.getDayOfMonth();
             int month=mDatePicker.getMonth();
@@ -64,18 +65,18 @@ public class AddReminderActivity extends Activity {
             reminderTime.set(Calendar.SECOND, 0);
 
             if(currentTime.getTimeInMillis()>=reminderTime.getTimeInMillis()){
-                mReminder.setState(0);
+                Toast.makeText(this, "Please select a future date", Toast.LENGTH_SHORT).show();
             }else{
                 mReminder.setState(1);
                 setAlarm(reminderTime, db.selectLastReminderId()+1);
+                mReminder.setContent(mContentText.getText().toString());
+                mReminder.setUserId(String.valueOf(mFacebookUser.getUserId()));
+                mReminder.setDate(reminderTime.getTime().toString());
+                db.insertReminders(mReminder, mFacebookUser);
+                finish();
             }
-            mReminder.setContent(mContentText.getText().toString());
-            mReminder.setUserId(String.valueOf(mFacebookUser.getUserId()));
-            mReminder.setDate(reminderTime.getTime().toString());
-            db.insertReminders(mReminder, mFacebookUser);
-            finish();
         }else{
-            Toast.makeText(this, "Please write the reminder content", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please write the reminder content!", Toast.LENGTH_SHORT).show();
         }
 
     }
