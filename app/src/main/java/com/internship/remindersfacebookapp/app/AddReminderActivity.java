@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.internship.remindersfacebookapp.adapters.ReminderBroadcastReceiver;
 import com.internship.remindersfacebookapp.adapters.SQLiteAdapter;
@@ -48,30 +49,35 @@ public class AddReminderActivity extends Activity {
     }
 
     public void AddReminder(View view){
-        Calendar currentTime = Calendar.getInstance();
-        int day=mDatePicker.getDayOfMonth();
-        int month=mDatePicker.getMonth();
-        int year=mDatePicker.getYear();
-        int hour=mTimePicker.getCurrentHour();
-        int minute=mTimePicker.getCurrentMinute();
+        if(mContentText.getText().toString().trim().length()>0){
+            Calendar currentTime = Calendar.getInstance();
+            int day=mDatePicker.getDayOfMonth();
+            int month=mDatePicker.getMonth();
+            int year=mDatePicker.getYear();
+            int hour=mTimePicker.getCurrentHour();
+            int minute=mTimePicker.getCurrentMinute();
 
-        Calendar reminderTime = Calendar.getInstance();
-        reminderTime.set(year,month,day);
-        reminderTime.set(Calendar.HOUR_OF_DAY, hour);
-        reminderTime.set(Calendar.MINUTE, minute);
-        reminderTime.set(Calendar.SECOND, 0);
+            Calendar reminderTime = Calendar.getInstance();
+            reminderTime.set(year,month,day);
+            reminderTime.set(Calendar.HOUR_OF_DAY, hour);
+            reminderTime.set(Calendar.MINUTE, minute);
+            reminderTime.set(Calendar.SECOND, 0);
 
-        if(currentTime.getTimeInMillis()>=reminderTime.getTimeInMillis()){
-            mReminder.setState(0);
+            if(currentTime.getTimeInMillis()>=reminderTime.getTimeInMillis()){
+                mReminder.setState(0);
+            }else{
+                mReminder.setState(1);
+                setAlarm(reminderTime, db.selectLastReminderId()+1);
+            }
+            mReminder.setContent(mContentText.getText().toString());
+            mReminder.setUserId(String.valueOf(mFacebookUser.getUserId()));
+            mReminder.setDate(reminderTime.getTime().toString());
+            db.insertReminders(mReminder, mFacebookUser);
+            finish();
         }else{
-            mReminder.setState(1);
-            setAlarm(reminderTime, db.selectLastReminderId()+1);
+            Toast.makeText(this, "Please write the reminder content", Toast.LENGTH_SHORT).show();
         }
-        mReminder.setContent(mContentText.getText().toString());
-        mReminder.setUserId(String.valueOf(mFacebookUser.getUserId()));
-        mReminder.setDate(reminderTime.getTime().toString());
-        db.insertReminders(mReminder, mFacebookUser);
-        finish();
+
     }
 
     public void setAlarm(Calendar calendar, int requestCode){
