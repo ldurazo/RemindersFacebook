@@ -2,28 +2,28 @@
 <pre-dex-items>
 
     <item
-        dex="C:\Users\Ringo\Documents\GitHub\RemindersFacebook\app\build\intermediates\pre-dexed\debug\bolts-26df357ff8dd83f08c3413f5498cba1f25fb784c.jar"
-        jar="C:\Users\Ringo\Documents\GitHub\RemindersFacebook\build\intermediates\exploded-aar\RemindersFacebook\facebook\unspecified\libs\bolts.jar"
+        dex="C:\Users\ldurazo.NEARSOFT\Documents\GitHub\RemindersFacebook\app\build\intermediates\pre-dexed\debug\classes-aa39091f736c109176e0964523b92c4d19e91815.jar"
+        jar="C:\Users\ldurazo.NEARSOFT\Documents\GitHub\RemindersFacebook\build\intermediates\exploded-aar\com.android.support\appcompat-v7\19.1.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28"/>
+    <item
+        dex="C:\Users\ldurazo.NEARSOFT\Documents\GitHub\RemindersFacebook\app\build\intermediates\pre-dexed\debug\bolts-585c94e08f339977777dd57246e0844fe7c0bbae.jar"
+        jar="C:\Users\ldurazo.NEARSOFT\Documents\GitHub\RemindersFacebook\build\intermediates\exploded-aar\RemindersFacebook\facebook\unspecified\libs\bolts.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="1e5ba33c837d05dcca9dc40a0ab458f8599d7aef"/>
     <item
-        dex="C:\Users\Ringo\Documents\GitHub\RemindersFacebook\app\build\intermediates\pre-dexed\debug\support-v4-19.0.1-bddf16650521e57b10686774d351b0fba4ee33cd.jar"
-        jar="C:\Users\Ringo\AppData\Local\Android\android-studio\sdk\extras\android\m2repository\com\android\support\support-v4\19.0.1\support-v4-19.0.1.jar"
+        dex="C:\Users\ldurazo.NEARSOFT\Documents\GitHub\RemindersFacebook\app\build\intermediates\pre-dexed\debug\classes-534da4edf7e7eaabe71c38ef6ab49c17db99661d.jar"
+        jar="C:\Users\ldurazo.NEARSOFT\Documents\GitHub\RemindersFacebook\build\intermediates\exploded-aar\RemindersFacebook\facebook\unspecified\classes.jar"
         jumboMode="false"
         revision="19.1.0"
-        sha1="587da9a481ffd341d2fa091704489b89845ddacd"/>
+        sha1="bc2fedc5d605be01ed4beb5af1b882d375cab7dd"/>
     <item
-        dex="C:\Users\Ringo\Documents\GitHub\RemindersFacebook\app\build\intermediates\pre-dexed\debug\classes-243a03185a2591bb79a33024ae66c8ca7edde31a.jar"
-        jar="C:\Users\Ringo\Documents\GitHub\RemindersFacebook\build\intermediates\exploded-aar\RemindersFacebook\facebook\unspecified\classes.jar"
+        dex="C:\Users\ldurazo.NEARSOFT\Documents\GitHub\RemindersFacebook\app\build\intermediates\pre-dexed\debug\support-v4-19.1.0-082fa73fbce6205821567ae582713ba49c080dbe.jar"
+        jar="C:\Users\ldurazo.NEARSOFT\AppData\Local\Android\android-studio\sdk\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
         jumboMode="false"
         revision="19.1.0"
-        sha1="6d37bbf92f4cf078917c3ef9015c7c620aedfe64"/>
-    <item
-        dex="C:\Users\Ringo\Documents\GitHub\RemindersFacebook\app\build\intermediates\pre-dexed\debug\classes-d66f8acd9b526e89679f1297228abc7e023725c8.jar"
-        jar="C:\Users\Ringo\Documents\GitHub\RemindersFacebook\build\intermediates\exploded-aar\com.android.support\appcompat-v7\19.0.1\classes.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="f71a6822470c9eb659d4f4a6cb57b780b35f058b"/>
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67"/>
 
 </pre-dex-items>

@@ -18,4 +18,4 @@
     <item android:drawable="@drawable/com_facebook_picker_list_pressed"  />
     <item android:drawable="@drawable/com_facebook_picker_list_longpressed"  />
 </transition>
-<!-- From: file:/C:/Users/Ringo/Documents/GitHub/RemindersFacebook/facebook/res/drawable/com_facebook_picker_list_selector_background_transition.xml -->
+<!-- From: file:/C:/Users/ldurazo.NEARSOFT/Documents/GitHub/RemindersFacebook/facebook/res/drawable/com_facebook_picker_list_selector_background_transition.xml -->

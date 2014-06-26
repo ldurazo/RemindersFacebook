@@ -15,12 +15,12 @@ import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.LoginButton;
-import com.internship.remindersfacebookapp.models.FacebookUser;
+import com.internship.remindersfacebookapp.models.RemindersUser;
 
 import java.util.Arrays;
 
 public class LoginFragment extends Fragment {
-	FacebookUser mFacebookUser;
+	RemindersUser mRemindersUser;
 	private static final String TAG = "MainFragment";
 	private Session.StatusCallback callback = new Session.StatusCallback() {
 		@Override
@@ -90,14 +90,16 @@ public class LoginFragment extends Fragment {
 				@Override
 				public void onCompleted(GraphUser user, Response response) {
 					if (user != null) {
-						mFacebookUser=new FacebookUser(
+						mRemindersUser =new RemindersUser(
 								user.getName(),
 								user.getProperty("email").toString(),
-								user.getId());
+								user.getId(),
+                                user.getId());
 						Intent viewPagerIntent = new Intent(getActivity().getApplicationContext(), ViewPagerActivity.class);
-						viewPagerIntent.putExtra(FacebookUser.USERNAME, mFacebookUser.getName());
-						viewPagerIntent.putExtra(FacebookUser.MAIL, mFacebookUser.getMail());
-						viewPagerIntent.putExtra(FacebookUser.IMAGE, mFacebookUser.getImage());
+						viewPagerIntent.putExtra(RemindersUser.USERNAME, mRemindersUser.getName());
+						viewPagerIntent.putExtra(RemindersUser.MAIL, mRemindersUser.getMail());
+						viewPagerIntent.putExtra(RemindersUser.IMAGE, mRemindersUser.getImage());
+                        viewPagerIntent.putExtra(RemindersUser.USER_ID, mRemindersUser.getUserId());
 						startActivity(viewPagerIntent);
 					}
 				}

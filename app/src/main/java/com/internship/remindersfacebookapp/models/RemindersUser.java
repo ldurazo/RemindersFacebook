@@ -1,20 +1,21 @@
 package com.internship.remindersfacebookapp.models;
 
 
-public class FacebookUser {
+public class RemindersUser {
 	public static String USERNAME="profile_name";
 	public static String MAIL="profile_mail";
 	public static String IMAGE="profile_image";
+    public static String USER_ID="user_id";
 	private String mName;
 	private String mMail;
 	private String mImage;
-	private long userId;
+	private String mUserId;
 
-	public FacebookUser(String userName, String userMail, String userImage) {
+	public RemindersUser(String userName, String userMail, String userImage, String userId) {
 		mName=userName;
 		mMail=userMail;
 		mImage=userImage;
-		userId = Long.parseLong(mImage);
+		mUserId = userId;
 	}
 
 	public String getImage() {
@@ -29,7 +30,7 @@ public class FacebookUser {
 		return mMail;
 	}
 
-	public long getUserId() {
-		return userId;
+	public String getUserId() {
+		return mUserId;
 	}
 }
