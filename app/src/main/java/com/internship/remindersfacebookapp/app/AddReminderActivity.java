@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
@@ -25,7 +27,10 @@ public class AddReminderActivity extends Activity {
 	private RemindersUser mRemindersUser;
     private Reminder mReminder = new Reminder();
     private TimePicker mTimePicker;
-    private AlarmManager mAlarmManager;
+    private String mFlag = null;
+    private Button mButtonAdd;
+    private Button mButtonShow;
+    Bundle mExtras;
     SQLiteAdapter db;
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +39,27 @@ public class AddReminderActivity extends Activity {
 		mContentText = (EditText) findViewById(R.id.reminder_editName);
 		mDatePicker = (DatePicker) findViewById(R.id.datePicker);
         mTimePicker = (TimePicker) findViewById(R.id.timePicker);
-		Bundle extras = getIntent().getExtras();
+		mExtras = getIntent().getExtras();
+        mButtonShow = (Button) findViewById(R.id.button_show);
+        mButtonAdd = (Button) findViewById(R.id.add_reminder_button);
 		mRemindersUser = new RemindersUser(
-				extras.getString(RemindersUser.USERNAME),
-				extras.getString(RemindersUser.MAIL),
-				extras.getString(RemindersUser.IMAGE),
-                extras.getString(RemindersUser.USER_ID));
-        mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+				mExtras.getString(RemindersUser.USERNAME),
+				mExtras.getString(RemindersUser.MAIL),
+				mExtras.getString(RemindersUser.IMAGE),
+                mExtras.getString(RemindersUser.USER_ID));
+        mFlag = mExtras.getString(RemindersUser.FLAG);
+        if (mFlag.equals("EDIT")){
+            mButtonShow.setText("Change content");
+            mButtonAdd.setText("Save changes");
+        }
         db = new SQLiteAdapter(getApplicationContext());
 	}
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        db.close();
+    }
 
     @Override
     protected void onStop() {
@@ -60,6 +77,7 @@ public class AddReminderActivity extends Activity {
             int minute=mTimePicker.getCurrentMinute();
 
             Calendar reminderTime = Calendar.getInstance();
+            //noinspection ResourceType
             reminderTime.set(year,month,day);
             reminderTime.set(Calendar.HOUR_OF_DAY, hour);
             reminderTime.set(Calendar.MINUTE, minute);
@@ -68,27 +86,47 @@ public class AddReminderActivity extends Activity {
             if(currentTime.getTimeInMillis()>=reminderTime.getTimeInMillis()){
                 Toast.makeText(this, "Please select a future date", Toast.LENGTH_SHORT).show();
             }else{
+                db.deleteSelectedReminder(mExtras.getString(Reminder.CONTENT),mExtras.getString(Reminder.DATE));
                 mReminder.setState(1);
                 mReminder.setContent(mContentText.getText().toString());
-                mReminder.setUserId(String.valueOf(mRemindersUser.getUserId()));
+                mReminder.setUserId(mRemindersUser.getUserId());
                 mReminder.setDate(reminderTime.getTime().toString());
-                setAlarm(reminderTime, db.selectLastReminderId()+1);
-                db.insertReminders(mReminder, mRemindersUser);
-                finish();
+                mReminder.setAlarmRequestCode(db.selectLastReminderId()+1);
+                    db.insertReminders(mReminder, mRemindersUser);
+                    setAlarm(reminderTime, db.selectLastReminderId());
+                    finish();
             }
         }else{
             Toast.makeText(this, "Please write the reminder content!", Toast.LENGTH_SHORT).show();
         }
+    }
 
+    public void ShowElements(View view){
+        if(mContentText.getText().toString().trim().length()>0) {
+            mContentText.setVisibility(View.INVISIBLE);
+            mButtonShow.setVisibility(View.INVISIBLE);
+            mButtonAdd.setVisibility(View.VISIBLE);
+            mDatePicker.setVisibility(View.VISIBLE);
+            mTimePicker.setVisibility(View.VISIBLE);
+            InputMethodManager inputManager = (InputMethodManager)
+                    getSystemService(Context.INPUT_METHOD_SERVICE);
+            //noinspection ConstantConditions
+            inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                    InputMethodManager.HIDE_NOT_ALWAYS);
+            Toast.makeText(this, "Now select the hour and date", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "Please write the reminder content!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void setAlarm(Calendar calendar, int requestCode){
-        Intent intent = new Intent(this, ReminderBroadcastReceiver.class);
-        intent.putExtra(Reminder.CONTENT,mReminder.getContent());
-        intent.putExtra(Reminder.DATE,mReminder.getDate());
-        intent.putExtra(Reminder.ID,String.valueOf(requestCode));
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), requestCode, intent, 0);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() , pendingIntent);
+        Intent mIntent = new Intent(this, ReminderBroadcastReceiver.class);
+        mIntent.putExtra(Reminder.CONTENT, mReminder.getContent());
+        mIntent.putExtra(Reminder.DATE, mReminder.getDate());
+        mIntent.putExtra(Reminder.ID, String.valueOf(requestCode));
+        mIntent.putExtra(RemindersUser.USER_ID, mRemindersUser.getUserId());
+        PendingIntent mPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), requestCode, mIntent, 0);
+        AlarmManager mAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        mAlarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), mPendingIntent);
     }
 }

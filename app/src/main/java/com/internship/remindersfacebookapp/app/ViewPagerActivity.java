@@ -11,6 +11,8 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
+
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.internship.remindersfacebookapp.adapters.FragmentPageAdapter;
@@ -66,16 +68,22 @@ public class ViewPagerActivity extends FragmentActivity implements ActionBar.Tab
             }
         });
 		SQLiteAdapter db = new SQLiteAdapter(getApplicationContext());
-		db.insertFacebookUser(mRemindersUser);
-		db.selectFacebookUser(mRemindersUser);
+		db.insertUser(mRemindersUser);
+		db.selectUser(mRemindersUser);
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if(Session.getActiveSession().getState() == SessionState.CLOSED){
-			this.finish();
-		}
+        if(RemindersUser.IS_FB_USER){
+            if(Session.getActiveSession().getState() == SessionState.CLOSED){
+                this.finish();
+            }
+        }else{
+            if (!MainActivity.mGoogleApiClient.isConnected()) {
+                this.finish();
+            }
+        }
 	}
 
 	@Override
@@ -87,6 +95,7 @@ public class ViewPagerActivity extends FragmentActivity implements ActionBar.Tab
 				reminderActivity.putExtra(RemindersUser.MAIL, mRemindersUser.getMail());
 				reminderActivity.putExtra(RemindersUser.IMAGE, mRemindersUser.getImage());
                 reminderActivity.putExtra(RemindersUser.USER_ID, mRemindersUser.getUserId());
+                reminderActivity.putExtra(RemindersUser.FLAG,"ADD");
 				startActivity(reminderActivity);
 				return true;
 		}
@@ -124,5 +133,11 @@ public class ViewPagerActivity extends FragmentActivity implements ActionBar.Tab
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
 
+    }
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(Intent.ACTION_MAIN);
+        i.addCategory(Intent.CATEGORY_HOME);
+        startActivity(i);
     }
 }
